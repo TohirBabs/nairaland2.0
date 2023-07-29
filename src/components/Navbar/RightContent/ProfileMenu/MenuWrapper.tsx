@@ -55,10 +55,10 @@ const MenuWrapper: React.FC<MenuWrapperProps> = () => {
                   <Text fontWeight={700}>
                     {user?.displayName || user?.email?.split("@")[0]}
                   </Text>
-                  <Flex alignItems="center">
+                  {/* <Flex alignItems="center">
                     <Icon as={IoSparkles} color="brand.100" mr={1} />
                     <Text color="gray.400">1 karma</Text>
-                  </Flex>
+                  </Flex> */}
                 </Box>
               </>
             ) : (

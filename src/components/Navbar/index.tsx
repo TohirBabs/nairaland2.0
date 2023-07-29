@@ -23,8 +23,8 @@ const Navbar: React.FC = () => {
   return (
     <Flex
       bg="white"
-      height="44px"
-      padding="6px 12px"
+      height={{ base: "50px", md: "60px" }}
+      padding="1rem"
       justifyContent={{ md: "space-between" }}
     >
       <Flex

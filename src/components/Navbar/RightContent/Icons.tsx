@@ -16,7 +16,7 @@ const ActionIcons: React.FC<ActionIconsProps> = () => {
   const { toggleMenuOpen } = useDirectory();
   return (
     <Flex alignItems="center" flexGrow={1}>
-      <Box
+      {/* <Box
         display={{ base: "none", md: "flex" }}
         alignItems="center"
         borderRight="1px solid"
@@ -52,7 +52,7 @@ const ActionIcons: React.FC<ActionIconsProps> = () => {
         >
           <Icon as={IoVideocamOutline} fontSize={22} />
         </Flex>
-      </Box>
+      </Box> */}
       <>
         {/* <Flex
           mr={1.5}
@@ -74,7 +74,7 @@ const ActionIcons: React.FC<ActionIconsProps> = () => {
         >
           <Icon as={IoNotificationsOutline} fontSize={20} />
         </Flex>
-        <Flex
+        {/* <Flex
           display={{ base: "none", md: "flex" }}
           mr={3}
           ml={1.5}
@@ -85,7 +85,7 @@ const ActionIcons: React.FC<ActionIconsProps> = () => {
           onClick={toggleMenuOpen}
         >
           <Icon as={GrAdd} fontSize={20} />
-        </Flex>
+        </Flex> */}
       </>
     </Flex>
   );
