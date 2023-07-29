@@ -9,7 +9,7 @@ export const theme = extendTheme({
     },
   },
   fonts: {
-    body: "Open Sans, sans-serif",
+    body: "Comfortaa, cursive, Open Sans, sans-serif",
   },
   styles: {
     global: () => ({
