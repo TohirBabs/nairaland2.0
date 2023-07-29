@@ -32,7 +32,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
       border="1px solid"
       borderColor="gray.300"
       p={2}
-      mb={4}
+      mb={1}
     >
       <Icon as={FaReddit} fontSize={36} color="gray.300" mr={4} />
       <Input

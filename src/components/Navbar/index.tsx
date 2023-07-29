@@ -22,11 +22,17 @@ const Navbar: React.FC = () => {
 
   return (
     <Flex
-      bg="white"
+      as="header"
+      position="fixed"
+      backgroundColor="rgba(255, 255, 255, 0.8)"
+      backdropFilter="saturate(180%) blur(5px)"
+      w="full"
       height={{ base: "50px", md: "60px" }}
-      padding="1rem"
-      justifyContent={{ md: "space-between" }}
+      padding="10px 1rem"
+      justifyContent="space-between"
+      zIndex={1000}
     >
+      <RightContent user={user as User} />
       <Flex
         align="center"
         gap={1}
@@ -35,7 +41,7 @@ const Navbar: React.FC = () => {
         cursor="pointer"
         onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
-        <Image src="/images/Logo.svg" height="25px" alt="" />
+        <Image src="/images/Logo.svg" height="2.5rem" alt="" />
         <Image
           alt=""
           display={{ base: "none", md: "unset" }}
@@ -44,7 +50,7 @@ const Navbar: React.FC = () => {
         />
       </Flex>
       {/* {user && <Directory />} */}
-      <SearchInput user={user as User} />
+      {/* <SearchInput user={user as User} /> */}
       <RightContent user={user as User} />
     </Flex>
   );
