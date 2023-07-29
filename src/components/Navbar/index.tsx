@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
         cursor="pointer"
         onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
-        <Image src="/images/logo.svg" height="25px" alt="" />
+        <Image src="/images/Logo.svg" height="25px" alt="" />
         <Image
           alt=""
           display={{ base: "none", md: "unset" }}
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           height="20px"
         />
       </Flex>
-      {user && <Directory />}
+      {/* {user && <Directory />} */}
       <SearchInput user={user as User} />
       <RightContent user={user as User} />
     </Flex>
