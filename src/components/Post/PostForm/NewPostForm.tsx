@@ -24,11 +24,12 @@ import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { firestore, storage } from "../../../firebase/clientApp";
-import TabItem from "./TabItem";
+// import TabItem from "./TabItem";
 import { postState } from "../../../atoms/postsAtom";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import TextInputs from "./TextInputs";
 import ImageUpload from "./ImageUpload";
+import TabItem from "./TabItem";
 
 const formTabs = [
   {
@@ -53,7 +54,7 @@ const formTabs = [
   },
 ];
 
-export type TabItem = {
+export type TabItemIcon = {
   title: string;
   icon: typeof Icon.arguments;
 };
