@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Stack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import {
   collection,
   doc,
@@ -255,23 +255,50 @@ const Posts: React.FC<PostsProps> = ({
       {loading ? (
         <PostLoader />
       ) : (
-        <Stack>
-          {postStateValue.posts.map((post: Post, index) => (
-            <PostItem
-              key={post.id}
-              post={post}
-              // postIdx={index}
-              onVote={onVote}
-              onDeletePost={onDeletePost}
-              userVoteValue={
-                postStateValue.postVotes.find((item) => item.postId === post.id)
-                  ?.voteValue
-              }
-              userIsCreator={userId === post.creatorId}
-              onSelectPost={onSelectPost}
-            />
-          ))}
-        </Stack>
+        <Flex direction={{ base: "column", md: "row" }} gap={1}>
+          <Stack flex={1}>
+            {postStateValue.posts.map(
+              (post: Post, index) =>
+                index % 2 === 0 && (
+                  <PostItem
+                    key={post.id}
+                    post={post}
+                    // postIdx={index}
+                    onVote={onVote}
+                    onDeletePost={onDeletePost}
+                    userVoteValue={
+                      postStateValue.postVotes.find(
+                        (item) => item.postId === post.id
+                      )?.voteValue
+                    }
+                    userIsCreator={userId === post.creatorId}
+                    onSelectPost={onSelectPost}
+                  />
+                )
+            )}
+          </Stack>
+          <Stack flex={1}>
+            {postStateValue.posts.map(
+              (post: Post, index) =>
+                index % 2 !== 0 && (
+                  <PostItem
+                    key={post.id}
+                    post={post}
+                    // postIdx={index}
+                    onVote={onVote}
+                    onDeletePost={onDeletePost}
+                    userVoteValue={
+                      postStateValue.postVotes.find(
+                        (item) => item.postId === post.id
+                      )?.voteValue
+                    }
+                    userIsCreator={userId === post.creatorId}
+                    onSelectPost={onSelectPost}
+                  />
+                )
+            )}
+          </Stack>
+        </Flex>
       )}
     </>
   );

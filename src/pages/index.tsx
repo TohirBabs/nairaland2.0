@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Stack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import {
   collection,
   DocumentData,
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         );
         // Getting 2 posts from 3 communities that user has joined
         let postPromises: Array<Promise<QuerySnapshot<DocumentData>>> = [];
-        [0, 1, 2].forEach((index) => {
+        [0, 1, 2, 3, 4, 5, 6, 7].forEach((index) => {
           if (!myCommunityIds[index]) return;
 
           postPromises.push(
@@ -67,7 +67,7 @@ const Home: NextPage = () => {
               query(
                 collection(firestore, "posts"),
                 where("communityId", "==", myCommunityIds[index]),
-                limit(3)
+                limit(10)
               )
             )
           );
@@ -199,32 +199,59 @@ const Home: NextPage = () => {
   return (
     <PageContentLayout>
       <>
-        <CreatePostLink />
+        {/* <CreatePostLink /> */}
         {loading ? (
           <PostLoader />
         ) : (
-          <Stack>
-            {postStateValue.posts.map((post: Post, index) => (
-              <PostItem
-                key={post.id}
-                post={post}
-                postIdx={index}
-                onVote={onVote}
-                onDeletePost={onDeletePost}
-                userVoteValue={
-                  postStateValue.postVotes.find(
-                    (item) => item.postId === post.id
-                  )?.voteValue
-                }
-                userIsCreator={user?.uid === post.creatorId}
-                onSelectPost={onSelectPost}
-                homePage
-              />
-            ))}
-          </Stack>
+          <Flex direction={{ base: "column", md: "row" }} gap={1}>
+            <Stack flex={1}>
+              {postStateValue.posts.map(
+                (post: Post, index) =>
+                  index % 2 === 0 && (
+                    <PostItem
+                      key={post.id}
+                      post={post}
+                      postIdx={index}
+                      onVote={onVote}
+                      onDeletePost={onDeletePost}
+                      userVoteValue={
+                        postStateValue.postVotes.find(
+                          (item) => item.postId === post.id
+                        )?.voteValue
+                      }
+                      userIsCreator={user?.uid === post.creatorId}
+                      onSelectPost={onSelectPost}
+                      homePage
+                    />
+                  )
+              )}
+            </Stack>
+            <Stack flex={1}>
+              {postStateValue.posts.map(
+                (post: Post, index) =>
+                  index % 2 !== 0 && (
+                    <PostItem
+                      key={post.id}
+                      post={post}
+                      postIdx={index}
+                      onVote={onVote}
+                      onDeletePost={onDeletePost}
+                      userVoteValue={
+                        postStateValue.postVotes.find(
+                          (item) => item.postId === post.id
+                        )?.voteValue
+                      }
+                      userIsCreator={user?.uid === post.creatorId}
+                      onSelectPost={onSelectPost}
+                      homePage
+                    />
+                  )
+              )}
+            </Stack>
+          </Flex>
         )}
       </>
-      <Stack spacing={5} position="sticky" top="14px">
+      <Stack spacing={5} position="sticky" top={1}>
         <Recommendations />
         <Premium />
         <PersonalHome />

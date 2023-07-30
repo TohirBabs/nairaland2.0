@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Box, Flex, Icon, Image } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
@@ -13,6 +13,8 @@ import RightContent from "./RightContent";
 import SearchInput from "./SearchInput";
 import router from "next/router";
 import useDirectory from "../../hooks/useDirectory";
+import { IoNotificationsOutline } from "react-icons/io5";
+import MenuWrapper from "./RightContent/ProfileMenu/MenuWrapper";
 
 const Navbar: React.FC = () => {
   const [user] = useAuthState(auth);
@@ -24,15 +26,18 @@ const Navbar: React.FC = () => {
     <Flex
       as="header"
       position="fixed"
+      left={0}
+      w={{ base: "full", md: "calc(100% - 304px)" }}
+      height={"60px"}
+      zIndex={1000}
       backgroundColor="rgba(255, 255, 255, 0.8)"
       backdropFilter="saturate(180%) blur(5px)"
-      w="full"
-      height={{ base: "50px", md: "60px" }}
-      padding="10px 1rem"
+      padding={{ base: 2, md: "10px 12px 10px 16px" }}
       justifyContent="space-between"
-      zIndex={1000}
+      alignItems="center"
+      borderRadius={"0 0 20px 20px"}
     >
-      <RightContent user={user as User} />
+      <MenuWrapper />
       <Flex
         align="center"
         gap={1}
@@ -46,12 +51,21 @@ const Navbar: React.FC = () => {
           alt=""
           display={{ base: "none", md: "unset" }}
           src="/images/nairalandText.svg"
-          height="20px"
+          height="30px"
         />
       </Flex>
       {/* {user && <Directory />} */}
       {/* <SearchInput user={user as User} /> */}
-      <RightContent user={user as User} />
+      <Flex
+        mr={1.5}
+        ml={1.5}
+        padding={1}
+        cursor="pointer"
+        borderRadius={4}
+        _hover={{ bg: "gray.200" }}
+      >
+        <Icon as={IoNotificationsOutline} fontSize={20} />
+      </Flex>
     </Flex>
   );
 };

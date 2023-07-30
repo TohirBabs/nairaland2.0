@@ -13,19 +13,15 @@ const PageContentLayout: React.FC<PageContentLayoutProps> = ({
 }) => {
   return (
     <Flex justify="center" p="5px 0px">
-      <Flex width={"full"} justify="center" maxWidth={maxWidth || "860px"}>
-        <Flex
-          direction="column"
-          width={{ base: "100%", md: "65%" }}
-          mr={{ base: 0, md: 6 }}
-        >
+      <Flex width={"full"} justify="center">
+        <Flex direction="column" mr={{ base: 0, md: 2 }} pt="60px">
           {children && children[0 as keyof typeof children]}
         </Flex>
         {/* Right Content */}
         <Box
           display={{ base: "none", md: "flex" }}
           flexDirection="column"
-          flexGrow={1}
+          minWidth="300px"
         >
           {children && children[1 as keyof typeof children]}
         </Box>
