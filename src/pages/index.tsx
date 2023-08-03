@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Flex, Stack } from "@chakra-ui/react";
+import { Flex, Image, Stack } from "@chakra-ui/react";
 import {
   collection,
   DocumentData,
@@ -197,66 +197,63 @@ const Home: NextPage = () => {
   }, [postStateValue.posts, user?.uid]);
 
   return (
-    <PageContentLayout>
-      <>
-        {/* <CreatePostLink /> */}
-        {loading ? (
-          <PostLoader />
-        ) : (
-          <Flex direction={{ base: "column", md: "row" }} gap={1}>
-            <Stack flex={1}>
-              {postStateValue.posts.map(
-                (post: Post, index) =>
-                  index % 2 === 0 && (
-                    <PostItem
-                      key={post.id}
-                      post={post}
-                      postIdx={index}
-                      onVote={onVote}
-                      onDeletePost={onDeletePost}
-                      userVoteValue={
-                        postStateValue.postVotes.find(
-                          (item) => item.postId === post.id
-                        )?.voteValue
-                      }
-                      userIsCreator={user?.uid === post.creatorId}
-                      onSelectPost={onSelectPost}
-                      homePage
-                    />
-                  )
-              )}
-            </Stack>
-            <Stack flex={1}>
-              {postStateValue.posts.map(
-                (post: Post, index) =>
-                  index % 2 !== 0 && (
-                    <PostItem
-                      key={post.id}
-                      post={post}
-                      postIdx={index}
-                      onVote={onVote}
-                      onDeletePost={onDeletePost}
-                      userVoteValue={
-                        postStateValue.postVotes.find(
-                          (item) => item.postId === post.id
-                        )?.voteValue
-                      }
-                      userIsCreator={user?.uid === post.creatorId}
-                      onSelectPost={onSelectPost}
-                      homePage
-                    />
-                  )
-              )}
-            </Stack>
-          </Flex>
-        )}
-      </>
-      <Stack spacing={5} position="sticky" top={1}>
-        <Recommendations />
-        <Premium />
-        <PersonalHome />
-      </Stack>
-    </PageContentLayout>
+    <Stack>
+      {loading ? (
+        <PostLoader />
+      ) : (
+        <Flex direction={{ base: "column", md: "row" }} gap={3}>
+          <Stack
+            flex={1}
+            gap={3}
+            width={{ base: "100vw", md: "auto" }}
+            alignItems="center"
+          >
+            {postStateValue.posts.map(
+              (post: Post, index) =>
+                index % 2 === 0 && (
+                  <PostItem
+                    key={post.id}
+                    post={post}
+                    postIdx={index}
+                    onVote={onVote}
+                    onDeletePost={onDeletePost}
+                    userVoteValue={
+                      postStateValue.postVotes.find(
+                        (item) => item.postId === post.id
+                      )?.voteValue
+                    }
+                    userIsCreator={user?.uid === post.creatorId}
+                    onSelectPost={onSelectPost}
+                    homePage
+                  />
+                )
+            )}
+          </Stack>
+          <Stack flex={1} gap={3}>
+            {postStateValue.posts.map(
+              (post: Post, index) =>
+                index % 2 !== 0 && (
+                  <PostItem
+                    key={post.id}
+                    post={post}
+                    postIdx={index}
+                    onVote={onVote}
+                    onDeletePost={onDeletePost}
+                    userVoteValue={
+                      postStateValue.postVotes.find(
+                        (item) => item.postId === post.id
+                      )?.voteValue
+                    }
+                    userIsCreator={user?.uid === post.creatorId}
+                    onSelectPost={onSelectPost}
+                    homePage
+                  />
+                )
+            )}
+          </Stack>
+        </Flex>
+      )}
+    </Stack>
   );
 };
 

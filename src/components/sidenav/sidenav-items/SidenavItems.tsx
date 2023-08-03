@@ -31,12 +31,14 @@ export function SidenavItems({ navItems, mode = "semi" }: SidenavItemsProps) {
       <Tooltip label={item.label} placement="right">
         <IconButton
           key={index}
+          fontSize="20px"
+          colorScheme={"green"}
           as={Link}
           _focus={{ bg: "gray.100" }}
-          _activeLink={{ boxShadow: "md", bg: "orange.500", color: "white" }}
+          _activeLink={{ boxShadow: "md", bg: "gray.300", color: "white" }}
           bg="transparent"
           aria-label={item.label}
-          borderRadius="xl"
+          borderRadius="lg"
           icon={<Icon />}
           to={item.to}
           color="black"
@@ -54,7 +56,7 @@ export function SidenavItems({ navItems, mode = "semi" }: SidenavItemsProps) {
         _hover={{
           bg: "gray.200",
         }}
-        _activeLink={{ bg: "orange.500", color: "white" }}
+        _activeLink={{ bg: "gray.500", color: "white" }}
         w="full"
         borderRadius="md"
       >
@@ -66,7 +68,7 @@ export function SidenavItems({ navItems, mode = "semi" }: SidenavItemsProps) {
     </ListItem>
   );
   return (
-    <List spacing={3}>
+    <List spacing={5}>
       {navItems.map((item, index) => sidebarItemInSemiMode(item, index))}
     </List>
   );

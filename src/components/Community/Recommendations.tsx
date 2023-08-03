@@ -58,6 +58,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
       cursor="pointer"
       border="1px solid"
       borderColor="gray.300"
+      w={"full"}
     >
       <Flex
         align="flex-end"

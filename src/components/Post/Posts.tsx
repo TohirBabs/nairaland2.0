@@ -259,7 +259,7 @@ const Posts: React.FC<PostsProps> = ({
           <Stack flex={1}>
             {postStateValue.posts.map(
               (post: Post, index) =>
-                index % 2 === 0 && (
+                index % 3 === 0 && (
                   <PostItem
                     key={post.id}
                     post={post}
@@ -280,7 +280,28 @@ const Posts: React.FC<PostsProps> = ({
           <Stack flex={1}>
             {postStateValue.posts.map(
               (post: Post, index) =>
-                index % 2 !== 0 && (
+                index % 3 !== 1 && (
+                  <PostItem
+                    key={post.id}
+                    post={post}
+                    // postIdx={index}
+                    onVote={onVote}
+                    onDeletePost={onDeletePost}
+                    userVoteValue={
+                      postStateValue.postVotes.find(
+                        (item) => item.postId === post.id
+                      )?.voteValue
+                    }
+                    userIsCreator={userId === post.creatorId}
+                    onSelectPost={onSelectPost}
+                  />
+                )
+            )}
+          </Stack>
+          <Stack flex={1}>
+            {postStateValue.posts.map(
+              (post: Post, index) =>
+                index % 3 !== 2 && (
                   <PostItem
                     key={post.id}
                     post={post}

@@ -11,12 +11,15 @@ type RightContentProps = {
 };
 
 const RightContent: React.FC<RightContentProps> = ({ user }) => {
+  console.log(user);
+
   return (
     <>
       <AuthModal />
       <Flex justifyContent="space-between" alignItems="center">
         {user ? <Icons /> : <AuthButtons />}
         <MenuWrapper />
+        <AuthButtons />
       </Flex>
     </>
   );

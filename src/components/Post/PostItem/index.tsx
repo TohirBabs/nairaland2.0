@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import {
+  Avatar,
   Flex,
   Icon,
   Image,
   Skeleton,
   Spinner,
   Stack,
+  Tag,
+  TagLabel,
   Text,
 } from "@chakra-ui/react";
 import moment from "moment";
 import { NextRouter } from "next/router";
-import { AiOutlineDelete } from "react-icons/ai";
+import {
+  AiFillDislike,
+  AiFillLike,
+  AiOutlineComment,
+  AiOutlineDelete,
+  AiOutlineDislike,
+  AiOutlineLike,
+} from "react-icons/ai";
 import { BsChat, BsDot } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import {
@@ -23,6 +33,7 @@ import {
 } from "react-icons/io5";
 import { Post } from "../../../atoms/postsAtom";
 import Link from "next/link";
+import { HiShare } from "react-icons/hi";
 
 export type PostItemContentProps = {
   post: Post;
@@ -85,9 +96,12 @@ const PostItem: React.FC<PostItemContentProps> = ({
     <Flex
       border="1px solid"
       bg="white"
+      w={"full"}
+      minWidth="300px"
+      maxWidth={"98vw"}
       overflow="hidden"
       borderColor={singlePostView ? "white" : "gray.300"}
-      borderRadius={singlePostView ? "20px 20px 0px 0px" : 20}
+      borderRadius={singlePostView ? "20px 20px 0px 0px" : 12}
       cursor={singlePostView ? "unset" : "pointer"}
       _hover={{ borderColor: singlePostView ? "none" : "gray.500" }}
       onClick={() => onSelectPost && post && onSelectPost(post, postIdx!)}
@@ -95,80 +109,122 @@ const PostItem: React.FC<PostItemContentProps> = ({
       <Flex
         direction="column"
         align="center"
+        justifyContent="space-between"
         bg={singlePostView ? "none" : "gray.100"}
         p={2}
+        gap={2}
         width="40px"
         borderRadius={singlePostView ? "0" : "3px 0px 0px 3px"}
       >
-        <Icon
-          as={
-            userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
-          }
-          color={userVoteValue === 1 ? "brand.100" : "gray.400"}
-          fontSize={22}
+        <Flex direction="column" align="center">
+          <Icon
+            as={userVoteValue === 1 ? AiFillLike : AiOutlineLike}
+            color={userVoteValue === 1 ? "brand.100" : "gray.400"}
+            fontSize={21}
+            cursor="pointer"
+            onClick={(event) => onVote(event, post, 1, post.communityId)}
+          />
+          <Text fontSize="9pt">{post.voteStatus}</Text>
+          <Icon
+            as={userVoteValue === -1 ? AiFillDislike : AiOutlineDislike}
+            color={userVoteValue === -1 ? "#4379FF" : "gray.400"}
+            fontSize={21}
+            cursor="pointer"
+            onClick={(event) => onVote(event, post, -1, post.communityId)}
+          />
+        </Flex>
+        <Flex
+          direction="column"
+          align="center"
+          borderRadius={4}
+          _hover={{ bg: "gray.200" }}
           cursor="pointer"
-          onClick={(event) => onVote(event, post, 1, post.communityId)}
-        />
-        <Text fontSize="9pt" fontWeight={600}>
-          {post.voteStatus}
-        </Text>
-        <Icon
-          as={
-            userVoteValue === -1
-              ? IoArrowDownCircleSharp
-              : IoArrowDownCircleOutline
-          }
-          color={userVoteValue === -1 ? "#4379FF" : "gray.400"}
-          fontSize={22}
-          cursor="pointer"
-          onClick={(event) => onVote(event, post, -1, post.communityId)}
-        />
+        >
+          <Icon as={AiOutlineComment} fontSize={21} color="gray.400" />
+          <Text fontSize="9pt">{post.numberOfComments}</Text>
+        </Flex>
       </Flex>
       <Flex direction="column" width="100%">
-        <Stack spacing={1} p="10px 10px">
+        <Stack spacing={2} p="8px" w="full">
           {post.createdAt && (
-            <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
-              {homePage && (
-                <>
-                  {post.communityImageURL ? (
+            <Stack
+              direction="row"
+              align="center"
+              justifyContent={"space-between"}
+              fontSize="14px"
+              w="full"
+            >
+              <Stack
+                direction="row"
+                spacing={0.6}
+                align="center"
+                fontSize="14px"
+              >
+                {homePage && (
+                  <>
+                    {/* {post.communityImageURL ? (
                     <Image
                       borderRadius="full"
                       boxSize="18px"
                       src={post.communityImageURL}
                       mr={2}
+                      alt=""
                     />
                   ) : (
                     <Icon as={FaReddit} fontSize={18} mr={1} color="blue.500" />
+                  )} */}
+
+                    <Link href={`tag/${post.communityId}`}>
+                      <Tag size="lg" colorScheme="gray" borderRadius="lg">
+                        <Avatar
+                          // src="https://bit.ly/sage-adebayo"
+                          size="xs"
+                          name="#"
+                          ml={-2}
+                          mr={1}
+                          borderRadius={"md"}
+                          bg="green.400"
+                        />
+                        <TagLabel
+                          fontWeight={700}
+                          color="green.400"
+                        >{`${post.communityId}`}</TagLabel>
+                      </Tag>
+                    </Link>
+
+                    <Icon as={BsDot} color="gray.500" fontSize={8} />
+                  </>
+                )}
+
+                <Text color="gray.500">
+                  {!homePage && post.userDisplayText}
+                  {moment(new Date(post.createdAt.seconds * 1000)).fromNow(
+                    true
                   )}
-                  <Link href={`r/${post.communityId}`}>
-                    <Text
-                      fontWeight={700}
-                      _hover={{ textDecoration: "underline" }}
-                      onClick={(event) => event.stopPropagation()}
-                    >{`r/${post.communityId}`}</Text>
-                  </Link>
-                  <Icon as={BsDot} color="gray.500" fontSize={8} />
-                </>
-              )}
-              <Text color="gray.500">
-                u/{post.userDisplayText}{" "}
-                {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
-              </Text>
+                </Text>
+              </Stack>
+              <Icon
+                color="gray.500"
+                justifySelf="right"
+                fontSize={22}
+                as={HiShare}
+                mr={2}
+              />
             </Stack>
           )}
           <Text fontSize="12pt" fontWeight={600}>
             {post.title}
           </Text>
-          <Text fontSize="10pt">{post.body}</Text>
           {post.imageURL && (
-            <Flex justify="center" align="center" p={2}>
+            <Flex justify="center" align="center">
               {loadingImage && (
                 <Skeleton height="200px" width="100%" borderRadius={4} />
               )}
               <Image
                 // width="80%"
                 // maxWidth="500px"
-                maxHeight="460px"
+                // maxHeight="460px"
+                borderRadius={"10px"}
                 src={post.imageURL}
                 display={loadingImage ? "none" : "unset"}
                 onLoad={() => setLoadingImage(false)}
@@ -176,9 +232,10 @@ const PostItem: React.FC<PostItemContentProps> = ({
               />
             </Flex>
           )}
+          <Text fontSize="10pt">{post.body}</Text>
         </Stack>
-        <Flex ml={1} mb={0.5} color="gray.500" fontWeight={600}>
-          <Flex
+        {/* <Flex ml={1} mb={0.5} color="gray.500" fontWeight={600}>
+          <Flex`
             align="center"
             p="8px 10px"
             borderRadius={4}
@@ -227,7 +284,7 @@ const PostItem: React.FC<PostItemContentProps> = ({
               )}
             </Flex>
           )}
-        </Flex>
+        </Flex> */}
       </Flex>
     </Flex>
   );

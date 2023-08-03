@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Icon, Image } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Icon, Image } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
@@ -16,7 +16,7 @@ import useDirectory from "../../hooks/useDirectory";
 import { IoNotificationsOutline } from "react-icons/io5";
 import MenuWrapper from "./RightContent/ProfileMenu/MenuWrapper";
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = ({ onOpen }: any) => {
   const [user] = useAuthState(auth);
 
   // Use <Link> for initial build; implement directory logic near end
@@ -35,9 +35,21 @@ const Navbar: React.FC = () => {
       padding={{ base: 2, md: "10px 12px 10px 16px" }}
       justifyContent="space-between"
       alignItems="center"
-      borderRadius={"0 0 20px 20px"}
+      borderRadius={"0 0 15px 15px"}
+      borderBottom="1px solid"
+      borderColor={"gray.200"}
     >
-      <MenuWrapper />
+      <Flex onClick={onOpen} alignItems="center">
+        <Flex alignItems="center">
+          {user ? (
+            <>
+              <Avatar src={user.photoURL || ""} borderRadius={10} size="sm" />
+            </>
+          ) : (
+            <Avatar bg={"gray.400"} borderRadius={10} size="sm" />
+          )}
+        </Flex>
+      </Flex>
       <Flex
         align="center"
         gap={1}
@@ -56,16 +68,8 @@ const Navbar: React.FC = () => {
       </Flex>
       {/* {user && <Directory />} */}
       {/* <SearchInput user={user as User} /> */}
-      <Flex
-        mr={1.5}
-        ml={1.5}
-        padding={1}
-        cursor="pointer"
-        borderRadius={4}
-        _hover={{ bg: "gray.200" }}
-      >
-        <Icon as={IoNotificationsOutline} fontSize={20} />
-      </Flex>
+
+      <RightContent user={user as User} />
     </Flex>
   );
 };
