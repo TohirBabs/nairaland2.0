@@ -6,9 +6,10 @@ import Recommendations from "../Community/Recommendations";
 
 type Props = {
   open?: boolean;
+  toggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Sidebar: React.FC<Props> = ({ open }) => {
+const Sidebar: React.FC<Props> = ({ open, toggleMenu }) => {
   return (
     <Stack
       border={"1px solid"}
@@ -30,6 +31,7 @@ const Sidebar: React.FC<Props> = ({ open }) => {
         p={1}
         alignItems="center"
         ml={3}
+        onClick={() => toggleMenu(!open)}
       >
         <Image src="/images/Logo.svg" height="2.5rem" alt="" />
         <Image

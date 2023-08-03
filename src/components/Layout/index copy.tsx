@@ -41,14 +41,15 @@ const Layout: React.FC<Props> = ({ children }) => {
           transition="all 0.3s"
           width={{ base: menuOpen ? "300px" : "0", md: "max-content" }}
         >
-          <Sidebar open={menuOpen} />
+          <Sidebar open={menuOpen} toggleMenu={setMenuOpen} />
         </Box>
         <Box
           height={{ base: windowSize, md: "100vh" }}
           pl={{ base: "0", md: "370px" }}
           minWidth={{ base: "100vw" }}
           transition="all 0.3s"
-          overflowY={"scroll"}
+          overflowY={menuOpen ? "hidden" : "scroll"}
+          position="relative"
           sx={{
             "&::-webkit-scrollbar": {
               width: "1rem",
@@ -69,6 +70,12 @@ const Layout: React.FC<Props> = ({ children }) => {
             },
           }}
         >
+          <Box
+            position={"absolute"}
+            width={"100%"}
+            backgroundColor={"rgba(0,0,0,0.5)"}
+            height={{ base: menuOpen ? "100vh" : "auto" }}
+          />
           <Flex
             align="center"
             gap={1}
