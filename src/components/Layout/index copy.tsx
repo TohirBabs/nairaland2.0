@@ -19,19 +19,21 @@ const Layout: React.FC<Props> = ({ children }) => {
       height={{ base: windowSize, md: "100vh" }}
       overflow="hidden"
     >
-      <Flex width={"max-content"} height="max-content">
+      <Flex width={"max-content"} height="max-content" gap={2}>
         <Box
           overflowY={"auto"}
+          overflowX={"hidden"}
           sx={{
             "&::-webkit-scrollbar": {
               width: "0.5rem",
-              backgroundColor: `rgba(0, 0, 0, 0)`,
+              backgroundColor: `transparent`,
             },
             "&::-webkit-scrollbar-thumb": {
               borderRadius: "5px",
               backgroundColor: `gray.400`,
             },
             "&::-webkit-scrollbar-track": {
+              backgroundColor: `transparent`,
               marginTop: "1rem",
               marginBottom: "1rem",
             },
@@ -39,7 +41,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
           transition="all 0.3s"
-          width={{ base: menuOpen ? "300px" : "0", md: "max-content" }}
+          width={{ base: menuOpen ? "300px" : "0", md: "350px" }}
         >
           <Sidebar open={menuOpen} toggleMenu={setMenuOpen} />
         </Box>
@@ -48,7 +50,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           pl={{ base: "0", md: "370px" }}
           minWidth={{ base: "100vw" }}
           transition="all 0.3s"
-          overflowY={menuOpen ? "hidden" : "scroll"}
+          overflowY={menuOpen ? "hidden" : "auto"}
           position="relative"
           sx={{
             "&::-webkit-scrollbar": {
@@ -72,7 +74,6 @@ const Layout: React.FC<Props> = ({ children }) => {
         >
           <Box
             position={"absolute"}
-            width={"100%"}
             backgroundColor={"rgba(0,0,0,0.5)"}
             height={{ base: menuOpen ? "100vh" : "auto" }}
           />
