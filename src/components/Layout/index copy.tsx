@@ -60,6 +60,7 @@ const Layout: React.FC<Props> = ({ children }) => {
               position={"absolute"}
               backgroundColor={"rgba(0,0,0,0.5)"}
               height={{ base: menuOpen ? "100vh" : "auto" }}
+              width="full"
             />
           )}
 
