@@ -19,25 +19,8 @@ const Layout: React.FC<Props> = ({ children }) => {
       height={{ base: windowSize, md: "100vh" }}
       overflow="hidden"
     >
-      <Flex width={"max-content"} height="max-content" gap={2}>
+      <Flex width={"max-content"} height="max-content">
         <Box
-          overflowY={"auto"}
-          overflowX={"hidden"}
-          sx={{
-            "&::-webkit-scrollbar": {
-              width: "0.5rem",
-              backgroundColor: `transparent`,
-            },
-            "&::-webkit-scrollbar-thumb": {
-              borderRadius: "5px",
-              backgroundColor: `gray.400`,
-            },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: `transparent`,
-              marginTop: "1rem",
-              marginBottom: "1rem",
-            },
-          }}
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
           transition="all 0.3s"
