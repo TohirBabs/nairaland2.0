@@ -14,8 +14,6 @@ import { SidenavItem } from "../sidenav/sidenav-items/SidenavItems";
 import SidenavProvider, { useSidenav } from "../sidenav/SidenavContext";
 import SidenavContainer from "../sidenav/SidenavContainer";
 import Sidenav from "../sidenav/Sidenav";
-import OneTapComponent from "./oneTapComponent";
-import { SessionProvider } from "next-auth/react";
 
 type Props = {
   children?: React.ReactNode;
@@ -34,7 +32,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     <Container px={1} maxW="full">
       <SidenavProvider>
         <SidenavContainer sidenav={<Sidenav navItems={navItems} />}>
-          <Navbar onOpen={onOpen} />
+          <Navbar />
           {children}
         </SidenavContainer>
       </SidenavProvider>
