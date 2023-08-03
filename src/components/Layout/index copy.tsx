@@ -24,7 +24,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
           transition="all 0.3s"
-          width={{ base: menuOpen ? "300px" : "0", md: "350px" }}
+          width={{ base: menuOpen ? "320px" : "0", md: "350px" }}
         >
           <Sidebar open={menuOpen} toggleMenu={setMenuOpen} />
         </Box>
