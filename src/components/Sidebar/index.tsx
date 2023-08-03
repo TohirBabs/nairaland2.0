@@ -17,7 +17,6 @@ const Sidebar: React.FC<Props> = ({ open }) => {
       borderRadius={20}
       padding={1}
       spacing={5}
-      position={{ base: "relative", md: "fixed" }}
       width={{ base: "300px", md: "350px" }}
       alignItems="center"
       transition={"all 0.2s"}
