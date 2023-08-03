@@ -19,7 +19,7 @@ const Sidebar: React.FC<Props> = ({ open, toggleMenu }) => {
       padding={1}
       m={1}
       spacing={5}
-      width={"full"}
+      width={open ? "full" : 0}
       alignItems="center"
       transition={"all 0.2s"}
       p={2}
