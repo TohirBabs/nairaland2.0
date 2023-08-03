@@ -21,6 +21,8 @@ const Layout: React.FC<Props> = ({ children }) => {
     >
       <Flex width={"max-content"} height="max-content">
         <Box
+          overflow="hidden"
+          overflowY={"scroll"}
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
           transition="all 0.3s"
