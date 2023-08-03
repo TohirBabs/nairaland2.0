@@ -21,20 +21,19 @@ const Layout: React.FC<Props> = ({ children }) => {
     >
       <Flex width={"max-content"} height="max-content">
         <Box
-          overflowY={"scroll"}
+          overflowY={"auto"}
           sx={{
             "&::-webkit-scrollbar": {
-              width: "1rem",
-              borderRadius: "3px",
-
+              width: "0.5rem",
               backgroundColor: `rgba(0, 0, 0, 0)`,
             },
             "&::-webkit-scrollbar-thumb": {
-              border: "4px solid rgba(0, 0, 0, 0)",
-              backgroundClip: "padding-box",
-              borderRadius: "0.5rem",
-              width: "0.5rem",
-              backgroundColor: `green.300`,
+              borderRadius: "5px",
+              backgroundColor: `gray.400`,
+            },
+            "&::-webkit-scrollbar-track": {
+              marginTop: "1rem",
+              marginBottom: "1rem",
             },
           }}
           position={{ base: "relative", md: "fixed" }}
@@ -46,7 +45,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         </Box>
         <Box
           height={{ base: windowSize, md: "100vh" }}
-          pl={{ base: "0", md: "360px" }}
+          pl={{ base: "0", md: "370px" }}
           minWidth={{ base: "100vw" }}
           transition="all 0.3s"
           overflowY={"scroll"}
@@ -62,7 +61,11 @@ const Layout: React.FC<Props> = ({ children }) => {
               backgroundClip: "padding-box",
               borderRadius: "0.5rem",
               width: "0.5rem",
-              backgroundColor: `green.300`,
+              backgroundColor: `gray.400`,
+            },
+            "&::-webkit-scrollbar-track": {
+              marginTop: "48px",
+              marginBottom: "1rem",
             },
           }}
         >

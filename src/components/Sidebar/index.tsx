@@ -16,6 +16,7 @@ const Sidebar: React.FC<Props> = ({ open }) => {
       background="white"
       borderRadius={20}
       padding={1}
+      m={1}
       spacing={5}
       width={{ base: "300px", md: "350px" }}
       alignItems="center"
@@ -41,8 +42,6 @@ const Sidebar: React.FC<Props> = ({ open }) => {
       <Recommendations />
       <Premium />
       <PersonalHome />
-      <Recommendations />
-      <Premium />
     </Stack>
   );
 };
