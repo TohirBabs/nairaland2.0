@@ -7,10 +7,11 @@ import About from "../../../../components/Community/About";
 import PageContentLayout from "../../../../components/Layout/PageContent";
 import Comments from "../../../../components/Post/Comments";
 import PostLoader from "../../../../components/Post/Loader";
-import PostItem from "../../../../components/Post/PostItem";
+// import PostItem from "../../../../components/Post/PostItem";
 import { auth, firestore } from "../../../../firebase/clientApp";
 import useCommunityData from "../../../../hooks/useCommunityData";
 import usePosts from "../../../../hooks/usePosts";
+import PostItem from "../../../../components/Post/PostItem/index copy";
 
 type PostPageProps = {};
 
