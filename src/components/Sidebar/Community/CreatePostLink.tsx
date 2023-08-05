@@ -5,7 +5,7 @@ import React from "react";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
-import useDirectory from "../../hooks/useDirectory";
+import useDirectory from "../../../hooks/useDirectory";
 
 type CreatePostProps = {};
 
