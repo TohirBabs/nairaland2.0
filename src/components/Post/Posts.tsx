@@ -16,9 +16,10 @@ import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
 import PostLoader from "./Loader";
 import { Post, postState, PostVote } from "../../atoms/postsAtom";
-import PostItem from "./PostItem";
+// import PostItem from "./PostItem";
 import { useRouter } from "next/router";
 import usePosts from "../../hooks/usePosts";
+import PostItem from "./PostItem/index copy";
 
 type PostsProps = {
   communityData?: Community;
