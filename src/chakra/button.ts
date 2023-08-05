@@ -2,8 +2,8 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
 export const Button: ComponentStyleConfig = {
   baseStyle: {
-    borderRadius: "60px",
-    fontSize: "10pt",
+    borderRadius: "2rem",
+    fontSize: "1rem",
     fontWeight: 700,
     _focus: {
       boxShadow: "none",
@@ -11,25 +11,25 @@ export const Button: ComponentStyleConfig = {
   },
   sizes: {
     sm: {
-      fontSize: "8pt",
+      fontSize: "1rem",
     },
     md: {
-      fontSize: "10pt",
+      fontSize: "1rem",
       // height: "28px",
     },
   },
   variants: {
     solid: {
       color: "white",
-      bg: "blue.500",
+      bg: "green.500",
       _hover: {
-        bg: "blue.400",
+        bg: "green.400",
       },
     },
     outline: {
-      color: "blue.500",
+      color: "green.500",
       border: "1px solid",
-      borderColor: "blue.500",
+      borderColor: "green.500",
     },
     oauth: {
       height: "34px",

@@ -7,7 +7,8 @@ const Premium: React.FC = () => {
     <Flex
       direction="column"
       bg="white"
-      borderRadius={4}
+      borderRadius={10}
+      overflow="hidden"
       cursor="pointer"
       p="12px"
       border="1px solid"

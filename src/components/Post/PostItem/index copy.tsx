@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
   Avatar,
+  Badge,
+  Box,
   Flex,
   Icon,
   Image,
@@ -95,22 +97,22 @@ const PostItem: React.FC<PostItemContentProps> = ({
   return (
     <Flex
       border="1px solid"
-      backgroundColor="green.100"
+      backgroundColor="gray.100"
       w={"full"}
       minWidth="300px"
       maxWidth={"98vw"}
       overflow="hidden"
-      borderColor={singlePostView ? "white" : "green.300"}
+      borderColor={singlePostView ? "white" : "gray.300"}
       borderRadius={singlePostView ? "20px 20px 0px 0px" : 12}
       cursor={singlePostView ? "unset" : "pointer"}
-      _hover={{ borderColor: singlePostView ? "none" : "green.500" }}
+      _hover={{ borderColor: singlePostView ? "none" : "gray.500" }}
       onClick={() => onSelectPost && post && onSelectPost(post, postIdx!)}
     >
       <Flex
         direction="column"
         align="center"
         justifyContent="space-between"
-        bg={singlePostView ? "none" : "green.100"}
+        bg={singlePostView ? "none" : "gray.100"}
         p={2}
         gap={2}
         width="50px"
@@ -147,70 +149,18 @@ const PostItem: React.FC<PostItemContentProps> = ({
       <Flex direction="column" width="100%" bg={"white"} borderRadius={"10px"}>
         <Stack spacing={2} p="8px" w="full">
           {post.createdAt && (
-            <Stack
-              direction="row"
-              align="center"
-              justifyContent={"space-between"}
-              fontSize="14px"
-              w="full"
-            >
-              <Stack
-                direction="row"
-                spacing={0.6}
-                align="center"
-                fontSize="14px"
-              >
-                {homePage && (
-                  <>
-                    {/* {post.communityImageURL ? (
-                    <Image
-                      borderRadius="full"
-                      boxSize="18px"
-                      src={post.communityImageURL}
-                      mr={2}
-                      alt=""
-                    />
-                  ) : (
-                    <Icon as={FaReddit} fontSize={18} mr={1} color="blue.500" />
-                  )} */}
-
-                    <Link href={`tag/${post.communityId}`}>
-                      <Tag size="lg" colorScheme="gray" borderRadius="lg">
-                        <Avatar
-                          // src="https://bit.ly/sage-adebayo"
-                          size="xs"
-                          name="#"
-                          ml={-2}
-                          mr={1}
-                          borderRadius={"md"}
-                          bg="green.400"
-                        />
-                        <TagLabel
-                          fontWeight={700}
-                          color="green.400"
-                        >{`${post.communityId}`}</TagLabel>
-                      </Tag>
-                    </Link>
-
-                    <Icon as={BsDot} color="gray.500" fontSize={8} />
-                  </>
-                )}
-
-                <Text color="gray.500">
-                  {!homePage && post.userDisplayText}
-                  {moment(new Date(post.createdAt.seconds * 1000)).fromNow(
-                    true
-                  )}
+            <Flex>
+              <Image src={"/images/spaceship.png"} width="35px" />
+              <Box ml="1">
+                <Text fontWeight="bold">
+                  {`${post.communityId}`}
+                  <Badge ml="1" colorScheme="gray">
+                    New
+                  </Badge>
                 </Text>
-              </Stack>
-              <Icon
-                color="gray.500"
-                justifySelf="right"
-                fontSize={22}
-                as={HiShare}
-                mr={2}
-              />
-            </Stack>
+                <Text fontSize="sm">{post.userDisplayText}</Text>
+              </Box>
+            </Flex>
           )}
           <Text fontSize="12pt" fontWeight={600}>
             {post.title}

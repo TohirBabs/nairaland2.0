@@ -21,11 +21,12 @@ import CreatePostLink from "../components/Community/CreatePostLink";
 import Recommendations from "../components/Community/Recommendations";
 import PageContentLayout from "../components/Layout/PageContent";
 import PostLoader from "../components/Post/Loader";
-import PostItem from "../components/Post/PostItem";
+// import PostItem from "../components/Post/PostItem";
 import { auth, firestore } from "../firebase/clientApp";
 import usePosts from "../hooks/usePosts";
 import Premium from "../components/Community/Premium";
 import PersonalHome from "../components/Community/PersonalHome";
+import PostItem from "../components/Post/PostItem/index copy";
 
 const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
@@ -201,10 +202,13 @@ const Home: NextPage = () => {
       {loading ? (
         <PostLoader />
       ) : (
-        <Flex direction={{ base: "column", md: "row" }} gap={3}>
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          gap={{ base: "3px", md: 3 }}
+        >
           <Stack
             flex={1}
-            gap={3}
+            gap={{ base: "3px", md: 3 }}
             width={{ base: "100vw", md: "auto" }}
             alignItems="center"
           >
@@ -229,7 +233,12 @@ const Home: NextPage = () => {
                 )
             )}
           </Stack>
-          <Stack flex={1} gap={3}>
+          <Stack
+            flex={1}
+            gap={{ base: "3px", md: 3 }}
+            width={{ base: "100vw", md: "auto" }}
+            alignItems="center"
+          >
             {postStateValue.posts.map(
               (post: Post, index) =>
                 index % 2 !== 0 && (

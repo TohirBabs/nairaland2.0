@@ -1,8 +1,9 @@
-import { Flex, Image, Stack } from "@chakra-ui/react";
+import { Flex, Heading, Image, Stack } from "@chakra-ui/react";
 // import Image from "next/image";
 import PersonalHome from "../Community/PersonalHome";
 import Premium from "../Community/Premium";
 import Recommendations from "../Community/Recommendations";
+import SearchInput from "../Navbar/SearchInput";
 
 type Props = {
   open?: boolean;
@@ -12,35 +13,31 @@ type Props = {
 const Sidebar: React.FC<Props> = ({ open, toggleMenu }) => {
   return (
     <Stack
-      border={"1px solid"}
-      borderColor=" gray.300"
-      background="white"
       borderRadius={20}
-      padding={1}
-      m={1}
-      spacing={5}
-      width={open ? "full" : 0}
+      bgColor={"gray.800"}
+      m={"10px"}
+      spacing={2}
+      width={{ base: "310px", md: "350px" }}
       alignItems="center"
       transition={"all 0.2s"}
-      p={2}
+      p={3}
+      minHeight={"96vh"}
     >
       <Flex
         align="center"
         gap={1}
         cursor="pointer"
-        p={1}
+        p={2}
         alignItems="center"
         ml={3}
         onClick={() => toggleMenu(!open)}
       >
-        <Image src="/images/Logo.svg" height="2.5rem" alt="" />
-        <Image
-          alt=""
-          display={{ base: "none", md: "unset" }}
-          src="/images/nairalandText.svg"
-          height="30px"
-        />
+        <Image src="/images/Logo.svg" height="2.2rem" alt="" />
+        <Heading color={"white"} fontFamily="Comfortaa" fontSize={"1.5rem"}>
+          nairaland
+        </Heading>
       </Flex>
+      <SearchInput />
       <Recommendations />
       <Premium />
       <PersonalHome />

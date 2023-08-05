@@ -54,7 +54,8 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
     <Flex
       direction="column"
       bg="white"
-      borderRadius={4}
+      borderRadius={10}
+      overflow="hidden"
       cursor="pointer"
       border="1px solid"
       borderColor="gray.300"

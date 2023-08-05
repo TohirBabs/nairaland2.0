@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   Icon,
   Menu,
@@ -11,7 +12,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useRecoilState } from "recoil";
 import { authModalState } from "../../../../atoms/authModalAtom";
 import { auth } from "../../../../firebase/clientApp";
@@ -19,7 +20,7 @@ import { auth } from "../../../../firebase/clientApp";
 import NoUserList from "./NoUserList";
 import UserList from "./UserList";
 
-import { FaRedditSquare } from "react-icons/fa";
+import { FaGoogle, FaRedditSquare } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import { IoSparkles } from "react-icons/io5";
 
@@ -29,31 +30,29 @@ const MenuWrapper: React.FC<MenuWrapperProps> = ({ onOpen }: any) => {
   const [authModal, setModalState] = useRecoilState(authModalState);
   const [user] = useAuthState(auth);
   console.log(user);
+  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth);
 
-  return (
+  return user ? (
     <Menu>
       <MenuButton
         cursor="pointer"
-        padding="0px"
-        borderRadius="4px"
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
       >
-        <Flex alignItems="center">
-          <Flex alignItems="center">
-            {user ? (
-              <>
-                <Avatar src={user.photoURL || ""} borderRadius={10} size="sm" />
-              </>
-            ) : (
-              <Avatar bg={"gray.400"} borderRadius={10} size="sm" />
-            )}
-          </Flex>
-        </Flex>
+        <Avatar src={user.photoURL || ""} borderRadius={10} size="md" />
       </MenuButton>
       <MenuList>
-        {user ? <UserList /> : <NoUserList setModalState={setModalState} />}
+        <UserList />
       </MenuList>
     </Menu>
+  ) : (
+    <Button
+      colorScheme="google"
+      leftIcon={<FaGoogle />}
+      onClick={() => signInWithGoogle()}
+      isLoading={loading}
+    >
+      Sign in
+    </Button>
   );
 };
 export default MenuWrapper;

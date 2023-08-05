@@ -11,12 +11,12 @@ export const Input: ComponentStyleConfig = {
       _hover: {
         bg: "white",
         border: "1px solid",
-        borderColor: "blue.500",
+        borderColor: "green.500",
       },
       _focus: {
         outline: "none",
         border: "1px solid",
-        borderColor: "blue.500",
+        borderColor: "green.500",
       },
     },
     addons: {

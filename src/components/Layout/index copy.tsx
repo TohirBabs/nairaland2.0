@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Stack } from "@chakra-ui/react";
 import React, { useRef } from "react";
+import MenuWrapper from "../Navbar/RightContent/ProfileMenu/MenuWrapper";
 
 import Sidebar from "../Sidebar";
 
@@ -18,20 +19,31 @@ const Layout: React.FC<Props> = ({ children }) => {
       width={"100vw"}
       height={{ base: windowSize, md: "100vh" }}
       overflow="hidden"
+      position={"relative"}
     >
+      {menuOpen && (
+        <Box
+          position={"fixed"}
+          left={"0"}
+          backgroundColor={"rgba(0,0,0,0.5)"}
+          height={{ base: menuOpen ? "100vh" : "auto" }}
+          width={{ base: "full", md: "0" }}
+        />
+      )}
       <Flex width={"max-content"} height="max-content">
         <Box
-          overflow="hidden"
-          overflowY={"scroll"}
+          overflowY={"auto"}
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
           transition="all 0.3s"
-          width={{ base: menuOpen ? "320px" : "0", md: "350px" }}
+          width={{ base: menuOpen ? "330px" : "0", md: "370px" }}
         >
           <Sidebar open={menuOpen} toggleMenu={setMenuOpen} />
         </Box>
+
         <Box
           height={{ base: windowSize, md: "100vh" }}
+          px={1}
           pl={{ base: "0", md: "370px" }}
           minWidth={{ base: "100vw" }}
           transition="all 0.3s"
@@ -52,37 +64,57 @@ const Layout: React.FC<Props> = ({ children }) => {
               backgroundColor: `gray.400`,
             },
             "&::-webkit-scrollbar-track": {
-              marginTop: "48px",
+              marginTop: "64px",
               marginBottom: "1rem",
             },
           }}
         >
-          {menuOpen && (
-            <Box
-              position={"absolute"}
-              backgroundColor={"rgba(0,0,0,0.5)"}
-              height={{ base: menuOpen ? "100vh" : "auto" }}
-              width="full"
-            />
-          )}
-
           <Flex
-            align="center"
-            gap={1}
-            cursor="pointer"
-            onClick={() => setMenuOpen(!menuOpen)}
-            p={1}
-            alignItems="center"
-            ml={3}
+            as={"header"}
+            zIndex={1000}
+            position={{ base: "sticky", md: "relative" }}
+            right={0}
+            top={0}
+            width="100%"
+            backgroundColor={{
+              base: "rgba(226, 232, 240, 0.3)",
+              md: "transparent",
+            }}
+            backdropFilter="saturate(180%) blur(5px)"
+            justifyContent={"space-between"}
+            p={2}
           >
-            <Image src="/images/Logo.svg" height="2.5rem" alt="" />
             <Image
+              onClick={() => setMenuOpen(!menuOpen)}
+              display={{ base: menuOpen ? "none" : "flex", md: "none" }}
+              src="/images/Logo.svg"
+              height="2.5rem"
               alt=""
-              display={{ base: "none", md: "unset" }}
-              src="/images/nairalandText.svg"
-              height="30px"
             />
+
+            <Flex
+              align="center"
+              gap={1}
+              cursor="pointer"
+              p={1}
+              alignItems="center"
+              ml={3}
+              fontSize="1.6rem"
+              fontWeight={700}
+            >
+              <Image
+                src="/images/spaceship.png"
+                height="2.5rem"
+                alt=""
+                mr={1}
+                p={1}
+              />
+              <h1>explore</h1>
+            </Flex>
+            <MenuWrapper />
           </Flex>
+          {/* <Box height="64px" width="full" /> */}
+
           {children}
         </Box>
       </Flex>
