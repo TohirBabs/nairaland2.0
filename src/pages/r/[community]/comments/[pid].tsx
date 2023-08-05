@@ -10,7 +10,7 @@ import PostLoader from "../../../../components/Post/Loader";
 import { auth, firestore } from "../../../../firebase/clientApp";
 import useCommunityData from "../../../../hooks/useCommunityData";
 import usePosts from "../../../../hooks/usePosts";
-import PostItem from "../../../../components/Post/PostItem";
+import PostItem from "../../../../components/Post/PostItem/index copy";
 
 type PostPageProps = {};
 
