@@ -43,7 +43,7 @@ import { HiShare } from "react-icons/hi";
 export type PostItemContentProps = {
   post: Post;
   onVote: (
-    // event: React.MouseEvent<SVGElement, MouseEvent>,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     post: Post,
     vote: number,
     communityId: string,
@@ -282,8 +282,9 @@ const PostItem: React.FC<PostItemContentProps> = ({
               margin={"2px"}
               p={1}
               fontSize={"0.8rem"}
+              cursor="pointer"
               backgroundColor={userVoteValue === 1 ? "green.300" : "gray.300"}
-              onClick={(event) => onVote(post, 1, post.communityId)}
+              onClick={(event) => onVote(event, post, 1, post.communityId)}
             >
               👍
             </Button>
@@ -292,8 +293,9 @@ const PostItem: React.FC<PostItemContentProps> = ({
               margin={"2px"}
               p={0}
               fontSize={"0.8rem"}
+              cursor="pointer"
               backgroundColor={userVoteValue === -1 ? "red.300" : "gray.300"}
-              onClick={(event) => onVote(post, -1, post.communityId)}
+              onClick={(event) => onVote(event, post, -1, post.communityId)}
             >
               👎
             </Button>
