@@ -25,6 +25,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         <Box
           position={"fixed"}
           left={"0"}
+          zIndex={100}
           backgroundColor={"rgba(0,0,0,0.5)"}
           height={{ base: menuOpen ? "100vh" : "auto" }}
           width={{ base: "full", md: "0" }}
@@ -32,6 +33,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       )}
       <Flex width={"max-content"} height="max-content">
         <Box
+          zIndex={1000}
           overflowY={"auto"}
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
@@ -71,7 +73,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         >
           <Flex
             as={"header"}
-            zIndex={1000}
+            zIndex={1}
             position={{ base: "sticky", md: "relative" }}
             right={0}
             top={0}
