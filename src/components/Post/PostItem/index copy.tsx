@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import {
   Avatar,
+  AvatarGroup,
   Badge,
   Box,
+  Button,
   Flex,
   Icon,
   Image,
@@ -10,6 +12,7 @@ import {
   Spinner,
   Stack,
   Tag,
+  TagCloseButton,
   TagLabel,
   Text,
 } from "@chakra-ui/react";
@@ -103,12 +106,12 @@ const PostItem: React.FC<PostItemContentProps> = ({
       maxWidth={"98vw"}
       overflow="hidden"
       borderColor={singlePostView ? "white" : "gray.300"}
-      borderRadius={singlePostView ? "20px 20px 0px 0px" : 12}
+      borderRadius={singlePostView ? "20px 20px 0px 0px" : 20}
       cursor={singlePostView ? "unset" : "pointer"}
       _hover={{ borderColor: singlePostView ? "none" : "gray.500" }}
       onClick={() => onSelectPost && post && onSelectPost(post, postIdx!)}
     >
-      <Flex
+      {/* <Flex
         direction="column"
         align="center"
         justifyContent="space-between"
@@ -145,28 +148,61 @@ const PostItem: React.FC<PostItemContentProps> = ({
           <Icon as={AiOutlineComment} fontSize={21} color="gray.400" />
           <Text fontSize="9pt">{post.numberOfComments}</Text>
         </Flex>
-      </Flex>
+      </Flex> */}
       <Flex direction="column" width="100%" bg={"white"} borderRadius={"10px"}>
-        <Stack spacing={2} p="8px" w="full">
+        <Stack spacing={2} p={1} w="full">
           {post.createdAt && (
             <Flex>
-              <Image src={"/images/spaceship.png"} width="35px" />
-              <Box ml="1">
-                <Text fontWeight="bold">
-                  {`${post.communityId}`}
-                  <Badge ml="1" colorScheme="gray">
-                    New
-                  </Badge>
-                </Text>
-                <Text fontSize="sm">{post.userDisplayText}</Text>
-              </Box>
+              {/* <Image src={"/images/spaceship.png"} width="35px" /> */}
+
+              <Flex gap={1} flexWrap="wrap">
+                <Tag
+                  size="sm"
+                  border="1px solid"
+                  p={2}
+                  height="max-content"
+                  colorScheme="cyan"
+                  borderRadius="full"
+                  borderColor={"gray.300"}
+                >
+                  🔬
+                  <TagLabel ml={1}>{`${post.communityId}`}</TagLabel>
+                </Tag>
+
+                <Tag
+                  size="sm"
+                  p={2}
+                  height="max-content"
+                  border="1px solid"
+                  borderColor={"gray.300"}
+                  colorScheme="messenger"
+                  borderRadius="full"
+                >
+                  🚀
+                  <TagLabel ml={1}>technology</TagLabel>
+                </Tag>
+
+                <Tag
+                  size="sm"
+                  p={2}
+                  height="max-content"
+                  border="1px solid"
+                  borderColor={"gray.300"}
+                  colorScheme="yellow"
+                  borderRadius="full"
+                >
+                  🔥
+                  <TagLabel ml={1}>amazing</TagLabel>
+                </Tag>
+              </Flex>
+              {/* <Text fontSize="sm">{post.userDisplayText}</Text> */}
             </Flex>
           )}
-          <Text fontSize="12pt" fontWeight={600}>
+          <Text px={2} fontSize="1.2rem" fontWeight={600}>
             {post.title}
           </Text>
           {post.imageURL && (
-            <Flex justify="center" align="center">
+            <Flex px={2} justify="center" align="center">
               {loadingImage && (
                 <Skeleton height="200px" width="100%" borderRadius={4} />
               )}
@@ -174,6 +210,8 @@ const PostItem: React.FC<PostItemContentProps> = ({
                 // width="80%"
                 // maxWidth="500px"
                 // maxHeight="460px"
+                border="1px solid"
+                borderColor="gray.300"
                 borderRadius={"10px"}
                 src={post.imageURL}
                 display={loadingImage ? "none" : "unset"}
@@ -182,8 +220,93 @@ const PostItem: React.FC<PostItemContentProps> = ({
               />
             </Flex>
           )}
-          <Text fontSize="10pt">{post.body}</Text>
+
+          <Text px={2} fontSize="0.8rem">
+            {post.body}
+          </Text>
         </Stack>
+        <Flex p={1} justifyContent="space-between" alignItems={"center"}>
+          <AvatarGroup size="md" max={3} spacing={"-15px"}>
+            <Avatar
+              name="Ryan Florence"
+              src="/images/avt1.jpg"
+              // borderRadius={17}
+            />
+            <Avatar
+              // borderRadius={17}
+              name="Segun Adebayo"
+              src="/images/avt2.jpg"
+            />
+            <Avatar
+              // borderRadius={17}
+              name="Kent Dodds"
+              src="/images/avt3.jpg"
+            />
+            <Avatar
+              // borderRadius={17}
+              name="Prosper Otemuyiwa"
+              src="/images/avt2.jpg"
+            />
+            <Avatar
+              // borderRadius={17}
+              name="Christian Nwamba"
+              src="/images/avt1.jpg"
+            />
+            <Avatar
+              // borderRadius={17}
+              name="Christian Nwamba"
+              src="/images/avt1.jpg"
+            />
+            <Avatar
+              // borderRadius={17}
+              name="Christian Nwamba"
+              src="/images/avt1.jpg"
+            />
+          </AvatarGroup>
+          <Flex
+            align="center"
+            gap={2}
+            border="1px solid"
+            borderColor={"gray.300"}
+            borderRadius="2rem"
+            backgroundColor={"gray.200"}
+          >
+            {/* <Icon
+              as={userVoteValue === 1 ? "👍" : AiOutlineLike}
+              color={userVoteValue === 1 ? "brand.100" : "gray.400"}
+              fontSize={21}
+              cursor="pointer"
+              onClick={(event) => onVote(event, post, 1, post.communityId)}
+            /> */}
+            <Button
+              margin={"2px"}
+              p={1}
+              fontSize={"0.8rem"}
+              backgroundColor={userVoteValue === 1 ? "green.300" : "gray.300"}
+              onClick={(event) => onVote(event, post, 1, post.communityId)}
+            >
+              👍
+            </Button>
+            <Text fontSize="9pt">{post.voteStatus}</Text>
+            <Button
+              margin={"2px"}
+              p={0}
+              fontSize={"0.8rem"}
+              backgroundColor={userVoteValue === -1 ? "red.300" : "gray.300"}
+              onClick={(event) => onVote(event, post, -1, post.communityId)}
+            >
+              👎
+            </Button>
+            {/* <Icon
+              as={userVoteValue === -1 ? AiFillDislike : AiOutlineDislike}
+              color={userVoteValue === -1 ? "#4379FF" : "gray.400"}
+              fontSize={21}
+              cursor="pointer"
+              onClick={(event) => onVote(event, post, -1, post.communityId)}
+            /> */}
+          </Flex>
+        </Flex>
+
         {/* <Flex ml={1} mb={0.5} color="gray.500" fontWeight={600}>
           <Flex`
             align="center"

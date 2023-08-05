@@ -10,7 +10,7 @@ import {
 import { auth } from "../../firebase/clientApp";
 import Directory from "./Directory";
 import RightContent from "./RightContent";
-import SearchInput from "./SearchInput";
+import SearchInput from "../Sidebar/SearchInput";
 import router from "next/router";
 import useDirectory from "../../hooks/useDirectory";
 import { IoNotificationsOutline } from "react-icons/io5";

@@ -1,8 +1,18 @@
-import { Box, Flex, Image, Stack } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  IconButton,
+  Image,
+  Stack,
+  Tag,
+  TagCloseButton,
+  TagLabel,
+} from "@chakra-ui/react";
 import React, { useRef } from "react";
-import MenuWrapper from "../Navbar/RightContent/ProfileMenu/MenuWrapper";
 
 import Sidebar from "../Sidebar";
+import SearchInput from "../Sidebar/SearchInput";
 
 type Props = {
   children?: React.ReactNode;
@@ -21,7 +31,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       overflow="hidden"
       position={"relative"}
     >
-      {menuOpen && (
+      {false && (
         <Box
           position={"fixed"}
           left={"0"}
@@ -37,8 +47,8 @@ const Layout: React.FC<Props> = ({ children }) => {
           overflowY={"auto"}
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
-          transition="all 0.3s"
-          width={{ base: menuOpen ? "330px" : "0", md: "370px" }}
+          transition="all 0.5s"
+          width={{ base: menuOpen ? "340px" : "0", md: "370px" }}
         >
           <Sidebar open={menuOpen} toggleMenu={setMenuOpen} />
         </Box>
@@ -55,7 +65,6 @@ const Layout: React.FC<Props> = ({ children }) => {
             "&::-webkit-scrollbar": {
               width: "1rem",
               borderRadius: "0.5rem",
-
               backgroundColor: `transparent`,
             },
             "&::-webkit-scrollbar-thumb": {
@@ -77,44 +86,96 @@ const Layout: React.FC<Props> = ({ children }) => {
             position={{ base: "sticky", md: "relative" }}
             right={0}
             top={0}
+            gap={2}
             width="100%"
+            maxWidth={"100vw"}
+            overflowX={"auto"}
             backgroundColor={{
               base: "rgba(226, 232, 240, 0.3)",
               md: "transparent",
             }}
             backdropFilter="saturate(180%) blur(5px)"
-            justifyContent={"space-between"}
-            p={2}
+            alignItems={"center"}
+            p={{ base: 1, md: 3 }}
+            px={3}
           >
-            <Image
+            <Box
+              display={{ base: "block", md: "none" }}
+              fontSize={"2.2rem"}
               onClick={() => setMenuOpen(!menuOpen)}
-              display={{ base: menuOpen ? "none" : "flex", md: "none" }}
-              src="/images/Logo.svg"
-              height="2.5rem"
-              alt=""
-            />
-
-            <Flex
-              align="center"
-              gap={1}
-              cursor="pointer"
-              p={1}
-              alignItems="center"
-              ml={3}
-              fontSize="1.6rem"
-              fontWeight={700}
             >
-              <Image
-                src="/images/spaceship.png"
-                height="2.5rem"
-                alt=""
-                mr={1}
-                p={1}
-              />
-              <h1>explore</h1>
+              ⚙
+            </Box>
+            <Flex gap={2}>
+              <Tag
+                size="sm"
+                border="1px solid"
+                p={3}
+                height="max-content"
+                colorScheme="cyan"
+                borderRadius="full"
+                borderColor={"gray.400"}
+              >
+                🔬
+                <TagLabel ml={1}>explore</TagLabel>
+                <TagCloseButton />
+              </Tag>
+              <Tag
+                size="sm"
+                border="1px solid"
+                p={3}
+                height="max-content"
+                colorScheme="red"
+                borderRadius="full"
+                borderColor={"gray.400"}
+              >
+                🎧
+                <TagLabel ml={1}>music</TagLabel>
+                <TagCloseButton />
+              </Tag>
+              <Tag
+                size="sm"
+                p={3}
+                height="max-content"
+                border="1px solid"
+                borderColor={"gray.400"}
+                colorScheme="messenger"
+                borderRadius="full"
+              >
+                🚀
+                <TagLabel ml={1}>technology</TagLabel>
+                <TagCloseButton />
+              </Tag>
+              <Tag
+                size="sm"
+                p={3}
+                height="max-content"
+                border="1px solid"
+                borderColor={"gray.400"}
+                colorScheme="blackAlpha"
+                borderRadius="full"
+              >
+                😹
+                <TagLabel ml={1}>laughs</TagLabel>
+                <TagCloseButton />
+              </Tag>
+              <Tag
+                size="sm"
+                p={3}
+                height="max-content"
+                border="1px solid"
+                borderColor={"gray.400"}
+                colorScheme="yellow"
+                borderRadius="full"
+              >
+                🔥
+                <TagLabel ml={1}>amazing</TagLabel>
+                <TagCloseButton />
+              </Tag>
             </Flex>
-            <MenuWrapper />
+            {/* <MenuWrapper /> */}
           </Flex>
+
           {/* <Box height="64px" width="full" /> */}
 
           {children}
