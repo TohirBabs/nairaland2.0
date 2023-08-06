@@ -10,6 +10,8 @@ import {
   TagLabel,
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
+import { FaCircle, FaPlusCircle } from "react-icons/fa";
+import { HiPlusCircle } from "react-icons/hi";
 
 import Sidebar from "../Sidebar";
 import SearchInput from "../Sidebar/SearchInput";
@@ -91,7 +93,7 @@ const Layout: React.FC<Props> = ({ children }) => {
             maxWidth={"100vw"}
             overflowX={"auto"}
             backgroundColor={{
-              base: "rgba(226, 232, 240, 0.3)",
+              base: "rgba(226, 232, 240, 0.5)",
               md: "transparent",
             }}
             backdropFilter="saturate(180%) blur(5px)"
@@ -101,10 +103,9 @@ const Layout: React.FC<Props> = ({ children }) => {
           >
             <Box
               display={{ base: "block", md: "none" }}
-              fontSize={"2.2rem"}
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              ⚙
+              <HiPlusCircle fontSize={"3rem"} color="green" />
             </Box>
             <Flex gap={2}>
               <Tag

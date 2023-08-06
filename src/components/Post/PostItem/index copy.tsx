@@ -226,7 +226,7 @@ const PostItem: React.FC<PostItemContentProps> = ({
           </Text>
         </Stack>
         <Flex p={1} justifyContent="space-between" alignItems={"center"}>
-          <AvatarGroup size="md" max={3} spacing={"-15px"}>
+          <AvatarGroup size="sm" max={3} spacing={"-7px"}>
             <Avatar
               name="Ryan Florence"
               src="/images/avt1.jpg"
@@ -279,10 +279,13 @@ const PostItem: React.FC<PostItemContentProps> = ({
               onClick={(event) => onVote(event, post, 1, post.communityId)}
             /> */}
             <Button
+              variant={userVoteValue === 1 ? "solid" : "outline"}
+              size={"sm"}
               margin={"2px"}
               p={1}
               fontSize={"0.8rem"}
               cursor="pointer"
+              minHeight={5}
               backgroundColor={userVoteValue === 1 ? "green.300" : "gray.300"}
               onClick={(event) => onVote(event, post, 1, post.communityId)}
             >
@@ -290,6 +293,8 @@ const PostItem: React.FC<PostItemContentProps> = ({
             </Button>
             <Text fontSize="9pt">{post.voteStatus}</Text>
             <Button
+              variant={userVoteValue === 1 ? "solid" : "outline"}
+              size={"sm"}
               margin={"2px"}
               p={0}
               fontSize={"0.8rem"}
