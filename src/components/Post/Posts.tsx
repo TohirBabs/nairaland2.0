@@ -257,7 +257,7 @@ const Posts: React.FC<PostsProps> = ({
         <PostLoader />
       ) : (
         <Flex direction={{ base: "column", md: "row" }} gap={1}>
-          <Stack flex={1}>
+          <Stack flex={1} gap={{ base: 1, md: 3 }}>
             {postStateValue.posts.map(
               (post: Post, index) =>
                 index % 3 === 0 && (
