@@ -73,7 +73,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
       <SearchInput />
       <Flex direction="column">
         {loading ? (
-          <Stack mt={2} p={3}>
+          <Stack mt={2} p={2}>
             <Flex justify="space-between" align="center">
               <SkeletonCircle size="10" />
               <Skeleton height="10px" width="70%" />
@@ -88,13 +88,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
             </Flex>
           </Stack>
         ) : (
-          <Flex
-            flexWrap={"wrap"}
-            justifyContent="center"
-            width="full"
-            py={2}
-            gap={2}
-          >
+          <Flex flexWrap={"wrap"} justifyContent="center" width="full" gap={2}>
             {communities.map((item, index) => {
               const isJoined = !!communityStateValue.mySnippets.find(
                 (snippet) => snippet.communityId === item.id
@@ -159,7 +153,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                   key={item.id}
                   size="sm"
                   border="1px solid"
-                  p={3}
+                  p={2}
                   height="max-content"
                   colorScheme="cyan"
                   borderRadius="full"
@@ -176,7 +170,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
             <Tag
               size="sm"
               border="1px solid"
-              p={3}
+              p={2}
               height="max-content"
               colorScheme="cyan"
               borderRadius="full"
@@ -188,8 +182,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
             <Tag
               size="sm"
               border="1px solid"
-              px={3}
-              py={3}
+              p={2}
               height="max-content"
               colorScheme="red"
               borderRadius="full"
@@ -201,7 +194,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
             </Tag>
             <Tag
               size="sm"
-              p={3}
+              p={2}
               height="max-content"
               border="1px solid"
               borderColor={"gray.400"}
@@ -213,7 +206,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
             </Tag>
             <Tag
               size="sm"
-              p={3}
+              p={2}
               height="max-content"
               border="1px solid"
               borderColor={"gray.400"}
@@ -225,7 +218,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
             </Tag>
             <Tag
               size="sm"
-              p={3}
+              p={2}
               height="max-content"
               border="1px solid"
               borderColor={"gray.400"}
