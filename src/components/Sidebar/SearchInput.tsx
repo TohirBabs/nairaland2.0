@@ -11,7 +11,7 @@ import { FaHashtag } from "react-icons/fa";
 
 const SearchInput: React.FC = () => {
   return (
-    <Flex alignItems="center" w="full">
+    <Flex alignItems="center" w="full" mb={1}>
       <InputGroup alignItems="center">
         <InputLeftElement
           pointerEvents="none"
