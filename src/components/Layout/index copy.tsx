@@ -49,7 +49,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           overflowY={"auto"}
           position={{ base: "relative", md: "fixed" }}
           height={{ base: windowSize, md: "100vh" }}
-          transition="all 0.5s"
+          transition="all 0.3s"
           width={{ base: menuOpen ? "340px" : "0", md: "370px" }}
         >
           <Sidebar open={menuOpen} toggleMenu={setMenuOpen} />

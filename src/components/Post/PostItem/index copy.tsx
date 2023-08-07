@@ -202,7 +202,7 @@ const PostItem: React.FC<PostItemContentProps> = ({
             {post.title}
           </Text>
           {post.imageURL && (
-            <Flex px={2} justify="center" align="center">
+            <Flex justify="center" align="center">
               {loadingImage && (
                 <Skeleton height="200px" width="100%" borderRadius={4} />
               )}
@@ -212,7 +212,8 @@ const PostItem: React.FC<PostItemContentProps> = ({
                 // maxHeight="460px"
                 border="1px solid"
                 borderColor="gray.300"
-                borderRadius={"10px"}
+                bgColor={"gray.400"}
+                borderRadius={20}
                 src={post.imageURL}
                 display={loadingImage ? "none" : "unset"}
                 onLoad={() => setLoadingImage(false)}
@@ -220,13 +221,17 @@ const PostItem: React.FC<PostItemContentProps> = ({
               />
             </Flex>
           )}
-
-          <Text px={2} fontSize="0.8rem">
-            {post.body}
-          </Text>
+          {post.body && (
+            <Text px={2} fontSize="0.8rem">
+              {post.body}
+            </Text>
+          )}
         </Stack>
         <Flex p={1} justifyContent="space-between" alignItems={"center"}>
-          <AvatarGroup size="sm" max={3} spacing={"-7px"}>
+          <AvatarGroup size="sm" max={4} spacing={"-7px"}>
+            <Box bgColor={"gray.200"} padding={2} borderRadius={15}>
+              💬
+            </Box>
             <Avatar
               name="Ryan Florence"
               src="/images/avt1.jpg"
@@ -282,10 +287,9 @@ const PostItem: React.FC<PostItemContentProps> = ({
               variant={userVoteValue === 1 ? "solid" : "outline"}
               size={"sm"}
               margin={"2px"}
-              p={1}
+              p={"10px"}
               fontSize={"0.8rem"}
               cursor="pointer"
-              minHeight={5}
               backgroundColor={userVoteValue === 1 ? "green.300" : "gray.300"}
               onClick={(event) => onVote(event, post, 1, post.communityId)}
             >
@@ -296,7 +300,7 @@ const PostItem: React.FC<PostItemContentProps> = ({
               variant={userVoteValue === 1 ? "solid" : "outline"}
               size={"sm"}
               margin={"2px"}
-              p={0}
+              p={"10px"}
               fontSize={"0.8rem"}
               cursor="pointer"
               backgroundColor={userVoteValue === -1 ? "red.300" : "gray.300"}

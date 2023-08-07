@@ -18,7 +18,7 @@ const Sidebar: React.FC<Props> = ({ open, toggleMenu }) => {
       borderRadius={25}
       bgColor={"gray.900"}
       m={{ base: "3px", md: "10px" }}
-      spacing={2}
+      spacing={1}
       border="2px solid"
       borderColor={"gray.400"}
       width={{ base: "334px", md: "350px" }}

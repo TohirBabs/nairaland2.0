@@ -206,8 +206,9 @@ const Home: NextPage = () => {
           direction={{ base: "column", md: "row" }}
           gap={{ base: "3px", md: 3 }}
         >
-          <Stack
+          <Flex
             flex={1}
+            flexDirection="column"
             gap={{ base: "3px", md: 3 }}
             width={{ base: "100vw", md: "auto" }}
             alignItems="center"
@@ -232,9 +233,10 @@ const Home: NextPage = () => {
                   />
                 )
             )}
-          </Stack>
-          <Stack
+          </Flex>
+          <Flex
             flex={1}
+            flexDirection="column"
             gap={{ base: "3px", md: 3 }}
             width={{ base: "100vw", md: "auto" }}
             alignItems="center"
@@ -259,7 +261,7 @@ const Home: NextPage = () => {
                   />
                 )
             )}
-          </Stack>
+          </Flex>
         </Flex>
       )}
     </Stack>
