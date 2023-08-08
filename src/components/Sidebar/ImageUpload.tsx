@@ -7,7 +7,6 @@ import { RiImageAddLine } from "react-icons/ri";
 type ImageUploadProps = {
   selectedFile?: string;
   setSelectedFile: (value: string) => void;
-  setSelectedTab: (value: string) => void;
   selectFileRef: React.RefObject<HTMLInputElement>;
   onSelectImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -15,7 +14,6 @@ type ImageUploadProps = {
 const ImageUpload: React.FC<ImageUploadProps> = ({
   selectedFile,
   setSelectedFile,
-  setSelectedTab,
   selectFileRef,
   onSelectImage,
 }) => {
@@ -23,8 +21,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     <Flex
       direction="column"
       justify="center"
-      width="100%"
+      flex="1"
+      bg={"gray.700"}
+      borderRadius={14}
+      height="100%"
+      align={"center"}
       position={"relative"}
+      overflow="hidden"
     >
       {selectedFile ? (
         <>
@@ -32,9 +35,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             // bgSize={"cover"}
             alt=""
             src={selectedFile as string}
-            maxHeight="300px"
-            maxWidth={"min-content"}
-            borderRadius={15}
+            minWidth="full"
+            minHeight={"full"}
+            width="100%"
+            objectFit={"cover"}
           />
 
           <Box
@@ -48,7 +52,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           </Box>
         </>
       ) : (
-        <Flex justify="center" align="center" p={5} width="20%" height={"50px"}>
+        <Flex justify="center" align="center" p={2}>
           <Box color="green.400" onClick={() => selectFileRef.current?.click()}>
             <RiImageAddLine fontSize={25} />
           </Box>
