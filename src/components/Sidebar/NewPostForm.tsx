@@ -15,6 +15,9 @@ import {
   Tag,
   TagLabel,
   TagLeftIcon,
+  DarkMode,
+  IconButton,
+  TagCloseButton,
 } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import {
@@ -36,30 +39,24 @@ import { postState } from "../../atoms/postsAtom";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import TextInputs from "./TextInputs";
 import ImageUpload from "./ImageUpload";
-import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  AddIcon,
+  ChevronDownIcon,
+  EditIcon,
+  ExternalLinkIcon,
+  HamburgerIcon,
+  RepeatIcon,
+} from "@chakra-ui/icons";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 
-const formTabs = [
-  {
-    title: "Post",
-    icon: IoDocumentText,
-  },
-  {
-    title: "Images & Video",
-    icon: IoImageOutline,
-  },
-  {
-    title: "Link",
-    icon: BsLink45Deg,
-  },
-  {
-    title: "Poll",
-    icon: BiPoll,
-  },
-  {
-    title: "Talk",
-    icon: BsMic,
-  },
-];
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+  AutoCompleteTag,
+} from "@choc-ui/chakra-autocomplete";
+import { FaHashtag } from "react-icons/fa";
 
 export type TabItemIcon = {
   title: string;
@@ -72,17 +69,31 @@ type NewPostFormProps = {
   user: User;
 };
 
+type Tag = { name: string; emoji: string };
+
 const NewPostForm: React.FC<NewPostFormProps> = ({
   communityId,
   communityImageURL,
   user,
 }) => {
-  const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
+  const hazhtags: Tag[] = [
+    { name: "explore", emoji: "🔬" },
+    { name: "music", emoji: "🎧" },
+    { name: "technology", emoji: "🚀" },
+    { name: "movie", emoji: "🎥" },
+    { name: "education", emoji: "📚" },
+    { name: "amazing", emoji: "🔥" },
+    { name: "conversation", emoji: "💬" },
+    { name: "games", emoji: "🎮" },
+    { name: "fashion", emoji: "👠" },
+    { name: "food", emoji: "🍔" },
+  ];
   const [textInputs, setTextInputs] = useState({
     title: "",
     body: "",
   });
   const [selectedFile, setSelectedFile] = useState<string>();
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const selectFileRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -155,92 +166,106 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   };
 
   return (
-    <Flex direction="column" borderRadius={15}>
-      <Stack>
-        <Menu>
-          <MenuButton as={Button}>#</MenuButton>
-          <MenuList
-            width={"50%"}
-            borderRadius={20}
-            bgColor="gray.800"
-            display="flex"
-            flexWrap={"wrap"}
-            gap={1}
-            p={1}
-            ml={6}
-          >
-            {/* <MenuItem> */}
-            <Tag
-              size="sm"
-              border="1px solid"
-              p={2}
-              height="max-content"
-              colorScheme="cyan"
-              borderRadius="full"
-              borderColor={"gray.400"}
-            >
-              🔬
-              <TagLabel ml={1}>explore</TagLabel>
-            </Tag>
-            {/* </MenuItem> */}
-            {/* <MenuItem> */}
-            <Tag
-              size="sm"
-              border="1px solid"
-              p={2}
-              height="max-content"
-              colorScheme="red"
-              borderRadius="full"
-              borderColor={"gray.400"}
-            >
-              🎧
-              <TagLabel ml={1}>music</TagLabel>
-            </Tag>
-            {/* </MenuItem> */}
-            {/* <MenuItem> */}
-            <Tag
-              size="sm"
-              border="1px solid"
-              p={2}
-              height="max-content"
-              colorScheme="blue"
-              borderRadius="full"
-              borderColor={"gray.400"}
-            >
-              🚀
-              <TagLabel ml={1}>technology</TagLabel>
-            </Tag>
-            {/* </MenuItem> */}
-            {/* <MenuItem> */}
-            <Tag
-              size="sm"
-              border="1px solid"
-              p={2}
-              height="max-content"
-              colorScheme="red"
-              borderRadius="full"
-              borderColor={"gray.400"}
-            >
-              🔥
-              <TagLabel ml={1}>amazing</TagLabel>
-            </Tag>
-            {/* </MenuItem> */}
-          </MenuList>
-        </Menu>
+    <Flex direction="column" borderRadius={15} gap={1}>
+      <Flex align={"center"} height="110px" gap={1}>
+        <Flex
+          flex="1"
+          // align={"center"}
+          justify="center"
+          bg={"gray.700"}
+          borderRadius={14}
+          height="100%"
+          position={"relative"}
+        >
+          <Flex direction="column" gap={1} width="full" height={"full"} m={1}>
+            {selectedTags &&
+              selectedTags.map((tag, index) => (
+                <Tag
+                  key={index}
+                  size="sm"
+                  border="1px solid"
+                  p={1}
+                  pl={0}
+                  height="max-content"
+                  width={"max-content"}
+                  colorScheme="cyan"
+                  borderRadius={12}
+                  borderColor={"gray.400"}
+                >
+                  <TagCloseButton /> {tag.emoji}
+                  <TagLabel>{tag.name}</TagLabel>
+                </Tag>
+              ))}
+          </Flex>
+          <DarkMode>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<FaHashtag fontSize={16} />}
+                bgColor="green.400"
+                variant=""
+                disabled={selectedTags.length < 3 ? false : true}
+                border="1px solid"
+                position={"absolute"}
+                borderRadius="0.7rem"
+                bottom={1}
+                right={1}
+                p={1}
+                borderColor="gray.400"
+                _focus={
+                  {
+                    // border: "none",
+                  }
+                }
+                _active={{
+                  background: "green.300",
+                  borderColor: "blue.500",
+                }}
+                _hover={{
+                  backgroundColor: "green.300",
+                  // border: "none",
+                }}
+              />
+              <MenuList
+                maxHeight={500}
+                overflow="auto"
+                borderRadius={15}
+                borderColor="gray.600"
+              >
+                {hazhtags.map((tag: Tag, index) => (
+                  <MenuItem
+                    key={index}
+                    onClick={() => {
+                      var i = selectedTags.findIndex((x) => x.name == tag.name);
+
+                      i === -1 && selectedTags.length < 3
+                        ? setSelectedTags([...selectedTags, tag])
+                        : null;
+                    }}
+                    icon={<>{tag.emoji}</>}
+                  >
+                    {tag.name}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+          </DarkMode>
+        </Flex>
         <ImageUpload
           selectedFile={selectedFile}
           setSelectedFile={setSelectedFile}
-          setSelectedTab={setSelectedTab}
           selectFileRef={selectFileRef}
           onSelectImage={onSelectImage}
         />
-        <TextInputs
-          textInputs={textInputs}
-          onChange={onTextChange}
-          handleCreatePost={handleCreatePost}
-          loading={loading}
-        />
-      </Stack>
+      </Flex>
+
+      <TextInputs
+        textInputs={textInputs}
+        onChange={onTextChange}
+        handleCreatePost={handleCreatePost}
+        loading={loading}
+      />
     </Flex>
   );
 };
