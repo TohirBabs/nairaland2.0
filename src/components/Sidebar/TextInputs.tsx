@@ -21,7 +21,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
 }) => {
   return (
     <Stack spacing={0} width="100%">
-      <Input
+      {/* <Input
         name="title"
         border="none"
         value={textInputs.title}
@@ -40,15 +40,17 @@ const TextInputs: React.FC<TextInputsProps> = ({
         fontSize="1.2rem"
         borderRadius={4}
         placeholder="title"
-      />
+      /> */}
       <Textarea
         name="body"
         border="none"
         value={textInputs.body}
         onChange={onChange}
         fontSize="1rem"
-        placeholder="Text (optional)"
+        placeholder="Share with everyone 🙃"
         _placeholder={{ color: "gray.500" }}
+        bg={"gray.700"}
+        borderRadius={14}
         _focus={
           {
             // outline: "none",
@@ -63,7 +65,8 @@ const TextInputs: React.FC<TextInputsProps> = ({
         <Button
           height="34px"
           padding="0px 30px"
-          disabled={!textInputs.title}
+          disabled={!textInputs.body}
+          mt={1}
           isLoading={loading}
           onClick={handleCreatePost}
         >
