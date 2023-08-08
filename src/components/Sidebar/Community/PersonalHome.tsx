@@ -34,7 +34,6 @@ const PersonalHome: React.FC = () => {
       bg="gray.800"
       color={"white"}
       borderRadius={20}
-      overflow="hidden"
       cursor="pointer"
       border="1px solid"
       borderColor="gray.500"
